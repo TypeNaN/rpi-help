@@ -119,7 +119,7 @@ function interfaces_config(){
 	done
 
 	if [ ${WPA_PASS1} == ${WPA_PASS2} ]; then
-		cp ./template/interfaces ./interfaces
+		cp ./template ./interfaces
 		sed -i -e 's/address #address_eth0/address '${ETH0}'/g' ./interfaces
 		sed -i -e 's/address #address_wlan0/address '${WLAN0}'/g' ./interfaces
 		sed -i -e 's/wpa-essid #your_ssid/wpa-essid '${SSID}'/g' ./interfaces
