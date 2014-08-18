@@ -29,7 +29,7 @@ function readme() {
 	whiptail \
 		--backtitle "${TXT_BACKTITLE}" \
 		--title "หน้าปก" \
-		--textbox ${PWD}/msg 34 83 \
+		--textbox ${PWD}/msg.md 34 83 \
 		--ok-button "ต่อไป" \
 		--scrolltext \
 		--clear
