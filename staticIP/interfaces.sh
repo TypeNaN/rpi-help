@@ -30,15 +30,15 @@ function wlan0_config() {
 }
 
 function ssid_config() {
-	SSID=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "จุดเชื่อมต่อ" --inputbox "โปรดระบุจุดเชื่อมต่อสัญญาณเครือข่าย \n[SSID]" 10 40 "Prawet-INKJET" 3>&1 1>&2 2>&3)
+	SSID=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "จุดเชื่อมต่อ" --inputbox "โปรดระบุจุดเชื่อมต่อสัญญาณเครือข่าย \n[SSID]" 10 40 "Access_Point" 3>&1 1>&2 2>&3)
 }
 
 function wpa_pass1_config() {
-	WPA_PASS1=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่อ" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่าย \n[WPA PASSWORD]" 10 40 "arrai5445#" 3>&1 1>&2 2>&3)
+	WPA_PASS1=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่อ" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่าย \n[WPA PASSWORD]" 10 40 "Password" 3>&1 1>&2 2>&3)
 }
 
 function wpa_pass2_config() {
-	WPA_PASS2=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่ออีกครั้ง" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่ายอีกครั้ง \n[WPA PASSWORD]" 10 40 "arrai5445#" 3>&1 1>&2 2>&3)
+	WPA_PASS2=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่ออีกครั้ง" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่ายอีกครั้ง \n[WPA PASSWORD]" 10 40 "Password" 3>&1 1>&2 2>&3)
 }
 
 function interfaces_backup() {
