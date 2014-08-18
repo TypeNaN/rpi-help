@@ -1,9 +1,9 @@
 ######################################
-# Purpose: Config static IP
-# Author: Chaimongkol Mangklathon
+# Purpose : Config static IP
+# Author : Chaimongkol Mangklathon
 # version : 1
 # Licenses : GNU GPL v2.0
-# Updated : 16/08/2557
+# Updated : 18/08/2557
 ######################################
 
 ######################################
@@ -20,7 +20,7 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet static
 network 192.168.1.0
-gateway 192.168.1.1
+gateway #address_gateway
 address #address_eth0
 netmask 255.255.255.0
 broadcast 192.168.1.255
@@ -35,7 +35,7 @@ allow-hotplug wlan0
 iface wlan0 inet static
 
 network 192.168.1.0
-gateway 192.168.1.1
+gateway #address_gateway
 address #address_wlan0
 netmask 255.255.255.0
 broadcast 192.168.1.255

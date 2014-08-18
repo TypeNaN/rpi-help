@@ -1,155 +1,131 @@
 #!/bin/bash
-#########################################################
+###############################################################################
 # Purpose: Config static IP
 # Author: Chaimongkol Mangklathon
-# version : 1
+# version : 2
 # Licenses : GNU GPL v2.0
-# Updated : 16/08/2557
-#########################################################
+# Updated : 18/08/2557
+###############################################################################
 
-USER_HOME=$(eval echo ~${SUDO_USER})
+if [ ${EUID} != 0 ]; then
+	whiptail \
+		--backtitle "${TXT_BACKTITLE}" \
+		--title "คุณไม่มีสิทธิ์เรียกคำสั่งนี้" \
+		--msgbox "ต้องใช้สิทธิ์ Root เท่านั้นในการเรียกใช้คำสั่งนี้\nโปรดลองใหม่อีกครั้งโดยใช้คำสั่ง : [ sudo $0 ] " 8 50 \
+		--ok-button "ออก" \
+		--clear
+	exit 1
+fi
 
-NORMAL=$(tput sgr0)
-BOLD=$(tput bold)
-SMUL=$(tput smul)
-RMUL=$(tput rmul)
-
-FBLK=$(tput setaf 0)
-FRED=$(tput setaf 1)
-FGRN=$(tput setaf 2)
-FYEL=$(tput setaf 3)
-FBLU=$(tput setaf 4)
-FMGT=$(tput setaf 5)
-FCYN=$(tput setaf 6)
-FWIT=$(tput setaf 7)
-
-BBLK=$(tput setab 0)
-BRED=$(tput setab 1)
-BGRN=$(tput setab 2)
-BYEL=$(tput setab 3)
-BBLU=$(tput setab 4)
-BMGT=$(tput setab 5)
-BCYN=$(tput setab 6)
-BWIT=$(tput setab 7)
-
-function critical_msg() {
-	echo -e "${FRED}${BOLD}${*}${NORMAL}"
+function router_config() {
+	ROUTER=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "หมายเลข Router" --inputbox "โปรดระบุหมายเลข Router" 8 40 "192.168.1.1" 3>&1 1>&2 2>&3)
 }
 
-function message() {
-	echo -e "${FCYN}${*}${NORMAL}"
+function eth0_config() {
+	ETH0=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "หมายเลขเครื่องสำหรับ eth0" --inputbox "โปรดระบุหมายเลขเครื่อง \n[LAN]" 10 40 "192.168.1.100" 3>&1 1>&2 2>&3)
 }
 
-function conf_msg(){
-	echo -e "${FGRN}${BOLD}${*}${NORMAL}"
+function wlan0_config() {
+	WLAN0=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "หมายเลขเครื่องสำหรับ wlan0" --inputbox "โปรดระบุหมายเลขเครื่อง \n[Wireless]" 10 40 "192.168.1.101" 3>&1 1>&2 2>&3)
 }
 
-function ir_msg(){
-	echo -e "${FCYN}${BOLD}${*}${NORMAL}"
+function ssid_config() {
+	SSID=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "จุดเชื่อมต่อ" --inputbox "โปรดระบุจุดเชื่อมต่อสัญญาณเครือข่าย \n[SSID]" 10 40 "Prawet-INKJET" 3>&1 1>&2 2>&3)
 }
 
-function banner(){
-	echo "
-	${BRED}${FYEL}${BOLD}           ___                            ${NORMAL}
-	${BRED}${FYEL}${BOLD} #########/ _ \########################## ${NORMAL}
-	${BRED}${FYEL}${BOLD} #       /_____\                        # ${NORMAL}
-	${BRED}${FYEL}${BOLD} #  _    _____  _______  ___   _  ____  # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # / \  /  _  \/  ___  \/   \ / \/___ \\ # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # | | |_ | | || /__ \ |\_| | | |   | | # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # | |  | | | || /  \| |  | | | |   | | # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # | |_ | | | || \_ /| | _| |_| |   | | # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # | | \| | | || / / | |/ | |_  |   | | # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # \___/\_/ \_/\__/  \_/\___| \_/   \_/ # ${NORMAL}
-	${BRED}${FYEL}${BOLD} #       __                             # ${NORMAL}
-	${BRED}${FYEL}${BOLD} #      /  \                            # ${NORMAL}
-	${BRED}${FYEL}${BOLD} #      \__/                            # ${NORMAL}
-	${BRED}${FYEL}${BOLD} # ___    __  ____  _____  ____  ___  _ # ${NORMAL}
-	${BRED}${FYEL}${BOLD} #/   \  /  \/___ \/____ \/___ \/   \/ \\# ${NORMAL}
-	${BRED}${FYEL}${BOLD} #\_| | / / |   | |___ | |   | || __/| |# ${NORMAL}
-	${BRED}${FYEL}${BOLD} #  | |/ /| |   | ||  \| |   | |\ \  | |# ${NORMAL}
-	${BRED}${FYEL}${BOLD} #  | | / | |   | || |_\ |   | |/ /  | |# ${NORMAL}
-	${BRED}${FYEL}${BOLD} #  |  /  | |   | ||   \ |   | || \__/ |# ${NORMAL}
-	${BRED}${FYEL}${BOLD} #  \_/   \_/   \_/\___/_/   \_/\______/# ${NORMAL}
-	${BRED}${FYEL}${BOLD} ######################################## ${NORMAL}
-	${BBLK}${FWIT}${BOLD}       $(date)       ${NORMAL}
+function wpa_pass1_config() {
+	WPA_PASS1=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่อ" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่าย \n[WPA PASSWORD]" 10 40 "arrai5445#" 3>&1 1>&2 2>&3)
+}
 
-	"
+function wpa_pass2_config() {
+	WPA_PASS2=$(whiptail --backtitle "${TXT_BACKTITLE}" --title "รหัสจุดเชื่อมต่ออีกครั้ง" --inputbox "โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่ายอีกครั้ง \n[WPA PASSWORD]" 10 40 "arrai5445#" 3>&1 1>&2 2>&3)
+}
 
-	if (( $EUID != 0 )); then
-		critical_msg "Require as ROOT permissions to execute."
-		critical_msg "Try using the following command : ${FYEL}[ sudo $0 ] "
-		exit 1
+function interfaces_backup() {
+	echo "Interfaces Backup..."
+	if [ -f ${DIR_BACKUP}/etc/network/interfaces ]; then
+		echo "Old Backup File ${DIR_BACKUP}/etc/network/interfaces"
+	else
+		echo "Create New Backup ${DIR_BACKUP}/etc/network/interfaces"
+		mkdir -p ${DIR_BACKUP}/etc/network
+		cp /etc/network/interfaces ${DIR_BACKUP}/etc/network/interfaces
+		if [ -f ${DIR_BACKUP}/etc/network/interfaces ]; then
+			echo "Backup Success..."
+		else
+			echo "Backup Failed..."
+		fi
 	fi
 }
 
-function confirm_install(){
-	message " CONFIG STATIC IP ADDRESS FOR RASPBERRY PI "
-	read -p "${BOLD}${FCYN} PRESS [Enter] RUN CONFIGURE, OR [Ctrl-C] CANCEL...${NORMAL}"
-	message " RUNNING.... "
+function interfaces_modify() {
+	echo "Interfaces Modify..."
+	cp ${DIR_STATICIP}/template ${DIR_STATICIP}/interfaces
+	sed -i -e 's/gateway #address_gateway/gateway '${ROUTER}'/g' ${DIR_STATICIP}/interfaces
+	sed -i -e 's/address #address_eth0/address '${ETH0}'/g' ${DIR_STATICIP}/interfaces
+	sed -i -e 's/address #address_wlan0/address '${WLAN0}'/g' ${DIR_STATICIP}/interfaces
+	sed -i -e 's/wpa-essid #your_ssid/wpa-essid '${SSID}'/g' ${DIR_STATICIP}/interfaces
+	sed -i -e 's/wpa-psk #your_wpa_pass/wpa-psk '${WPA_PASS1}'/g' ${DIR_STATICIP}/interfaces
 }
 
-function interfaces_config(){
-	message " Config file /etc/network/interfaces"
-	ir_msg " IP ADDRESS LAN [ENTER]: "
-	echo ""
-	read ETH0
-	echo ""
-	message " [eth0] ${FRED}${BOLD} ${ETH0} "
-	ir_msg " IP ADDRESS WIRELESS [ENTER]: "
-	echo ""
-	read WLAN0
-	echo ""
-	message " [wlan0] ${FRED}${BOLD} ${WLAN0} "
-	ir_msg " Your SSID [ENTER]: "
-	echo ""
-	read SSID
-	echo ""
-	message " SSID ${FRED}${BOLD} ${SSID} "
+function interfaces_update() {
+	echo "Interfaces Update..."
+	mv ${DIR_STATICIP}/interfaces /etc/network/interfaces
+}
 
-	WPA_PASS1="0"
-	WPA_PASS2="1"
+function interfaces_result() {
+	whiptail \
+		--backtitle "${TXT_BACKTITLE}" \
+		--title "/etc/network/interfaces" \
+		--textbox "/etc/network/interfaces" 34 83 \
+		--ok-button "ต่อไป" \
+		--scrolltext \
+		--clear
+}
+
+function interfaces_config() {
+	echo "Interfaces Config..."
+	router_config
+	eth0_config
+	wlan0_config
+						
+	until [ "${ETH0}" != "${WLAN0}" ]; do
+		whiptail \
+			--backtitle "${TXT_BACKTITLE}" \
+			--title "พบข้อผิดพลาด" \
+			--msgbox "ระหว่าง eth0 และ wlan0 ต้องเป็นหมายเลขที่ไม่ซ้ำกัน " 8 50 \
+			--ok-button "ตั้งค่าใหม่" \
+			--clear
+					
+			eth0_config
+			wlan0_config
+	done
+							
+	ssid_config
+	wpa_pass1_config
+	wpa_pass2_config
+
 	until [ ${WPA_PASS1} == ${WPA_PASS2} ]; do
-  		ir_msg " PASSWORD [ENTER]: "
-  		read -s WPA_PASS1
-  		ir_msg " PASSWORD AGAIN [ENTER]: "
-  		read -s WPA_PASS2
-  		if [ ${WPA_PASS1} != ${WPA_PASS2} ]; then
-  			critical " Passwords do not match, Please try again. "
-  		fi
+		whiptail \
+			--backtitle "${TXT_BACKTITLE}" \
+			--title "พบข้อผิดพลาด" \
+			--msgbox "รหัสผ่านต้องตรงกัน" 8 50 \
+			--ok-button "ตั้งค่าใหม่" \
+			--clear
+									
+		wpa_pass1_config
+		wpa_pass2_config
 	done
 
-	if [ ${WPA_PASS1} == ${WPA_PASS2} ]; then
-		cp ./template ./interfaces
-		sed -i -e 's/address #address_eth0/address '${ETH0}'/g' ./interfaces
-		sed -i -e 's/address #address_wlan0/address '${WLAN0}'/g' ./interfaces
-		sed -i -e 's/wpa-essid #your_ssid/wpa-essid '${SSID}'/g' ./interfaces
-		sed -i -e 's/wpa-psk #your_wpa_pass/wpa-psk '${WPA_PASS1}'/g' ./interfaces
-
-		clear
-		conf_msg " Config file $FRED$BOLD/etc/network/interfaces ${FYEL}${BOLD} Success. "
-		conf_msg " The network connection is defined as... "
-		conf_msg " eth0 ${FRED}${BOLD} ${ETH0} "
-		conf_msg " wlan0 ${FRED}${BOLD} ${WLAN0} ${FGRN}wpa-essid ${FRED}${BOLD} ${SSID} ${FGRN}wpa-psk ${FRED}${BOLD} ${WPA_PASS1} "
-		echo ""
-		conf_msg "You can see the config changes by the command: ${FYEL}[ cat /etc/network/interfaces ]"
-
-		if [ -f ${USER_HOME}/interfaces.backup ]; then
-        		conf_msg "You are have backup file ${FYEL}${USER_HOME}/interfaces.backup"
-			mv ./interfaces /etc/network/interfaces
-		else
-        		conf_msg "Create new backup file ${FYEL}${USER_HOME}/interfaces.backup"
-        		cat /etc/network/interfaces >> ${USER_HOME}/interfaces.backup
-			mv ./interfaces /etc/network/interfaces
-			echo "#Backup on $(date)" >> ${USER_HOME}/interfaces.backup
-		fi
-
-		conf_msg "If you need to restore your config, Try using the following command : ${FYEL}[ sudo mv ${USER_HOME}/interfaces.backup /etc/network/interfaces ]"
-
-	fi
 }
 
-banner
-confirm_install
+interfaces_backup
 interfaces_config
+interfaces_modify
+interfaces_update
+interfaces_result
 
-exit 0
+
+
+
+
+
