@@ -1,0 +1,96 @@
+#!/bin/bash
+###############################################################################
+# Purpose : Language ENGLISH
+# Author : Chaimongkol Mangklathon
+# version : 2
+# Licenses : GNU GPL v2.0
+# Updated : 20/08/2557
+###############################################################################
+
+###############################################################################
+## Function interfaces_config
+###############################################################################
+TXT_INCNF_MSG= 'Interfaces Config...'
+TXT_INCNF_ETH_WLAN_ERR_TITLE='Found Error.'
+TXT_INCNF_ETH_WLAN_ERR_MSG='Between eth0 and wlan0 must be unique number.'
+TXT_INCNF_ETH_WLAN_ERR_OK='RESET'
+TXT_INCNF_WPAPWD1_ERR_TITLE='Found Error.'
+TXT_INCNF_WPAPWD1_ERR_MSG='Passwords must match.'
+TXT_INCNF_WPAPWD1_ERR_OK='RESET'
+
+###############################################################################
+## Function interfaces_backup
+###############################################################################
+TXT_INBCKUP_MSG1='Interfaces Backup...'
+TXT_INBCKUP_F_MSG="Old Backup File ${DIR_BACKUP}/etc/network/interfaces"
+TXT_INBCKUP_NF_MSG="Create New Backup ${DIR_BACKUP}/etc/network/interfaces"
+TXT_INBCKUP_MSG2='Backup Success...'
+TXT_INBCKUP_MSG3='Backup Failed...'
+
+###############################################################################
+## Function interfaces_modify
+###############################################################################
+TXT_INMOD_MSG='Interfaces Modify...'
+
+###############################################################################
+## Function interfaces_update
+###############################################################################
+ TXT_INUPD_MSG='Interfaces Update...'
+
+###############################################################################
+## Function interfaces_result
+###############################################################################
+TXT_INRLT_TITLE='/etc/network/interfaces'
+TXT_INRLT_TEXTBOX='/etc/network/interfaces'
+TXT_INRLT_OK='DONE'
+
+###############################################################################
+## Function router_config
+###############################################################################
+TXT_INROU_TITLE='Router IP Address'
+TXT_INROU_INBOX='Press your router IP Address.'
+TXT_INROU_INBOX_DEF='192.168.1.1'
+TXT_INROU_OK='NEXT'
+TXT_INROU_CANCEL='BACK'
+
+###############################################################################
+## Function eth0_config
+###############################################################################
+TXT_INETH0_TITLE='IP For ETH0'
+TXT_INETH0_INBOX='Press your IP. \n[LAN]'
+TXT_INETH0_INBOX_DEF='192.168.1.100'
+TXT_INETH0_OK='NEXT'
+TXT_INETH0_CANCEL='BACK'
+
+###############################################################################
+## Function wlan0_config
+###############################################################################
+TXT_INWLAN0_TITLE='IP For WLAN0'
+TXT_INWLAN0_INBOX='Press your IP. \n[WIRELESS]'
+TXT_INWLAN0_INBOX_DEF='192.168.1.101'
+
+###############################################################################
+## Function ssid_config
+###############################################################################
+TXT_INSSID_TITLE='WI-FI'
+TXT_INSSID_INBOX='Press your access point. \n[SSID]'
+TXT_INSSID_INBOX_DEF='ACCESS-POINT'
+
+###############################################################################
+## Function wpa1_config
+###############################################################################
+TXT_INWPA1_TITLE='PASSWORD'
+TXT_INWPA1_INBOX='Press your password. \n[WPA-PSK]'
+TXT_INWPA1_INBOX_DEF='PASSWORD'
+
+###############################################################################
+## Function wpa2_config
+###############################################################################
+TXT_INWPA2_TITLE='PASSWORD'
+TXT_INWPA2_INBOX='Press your password again. \n[WPA-PSK]'
+TXT_INWPA2_INBOX_DEF='PASSWORD'
+
+
+
+
+

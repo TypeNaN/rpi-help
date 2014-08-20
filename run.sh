@@ -1,10 +1,10 @@
 #!/bin/bash
 ###############################################################################
-# Purpose: Config static IP
+# Purpose: Help user
 # Author: Chaimongkol Mangklathon
 # version : 2
 # Licenses : GNU GPL v2.0
-# Updated : 18/08/2557
+# Updated : 20/08/2557
 ###############################################################################
 
 USER_HOME=$(eval echo ~${SUDO_USER})
@@ -13,14 +13,18 @@ DIR=${PWD}
 DIR_STATICIP=${DIR}/staticIP
 DIR_BACKUP=${DIR}/backup
 
-TXT_BACKTITLE=("Raspberry pi Help Script By Chaimongkol Mangklathon [https://www.github.com/Yanatecho/rpi-help.git]")
+if [ ${LANG} == 'th_TH.UTF-8' ]; then
+	source ${DIR}/lang.th
+else
+	source ${DIR}/lang.en
+fi
 
 if [ ${EUID} != 0 ]; then
 	whiptail \
 		--backtitle "${TXT_BACKTITLE}" \
-		--title "คุณไม่มีสิทธิ์เรียกคำสั่งนี้" \
-		--msgbox "ต้องใช้สิทธิ์ Root เท่านั้นในการเรียกใช้คำสั่งนี้\nโปรดลองใหม่อีกครั้งโดยใช้คำสั่ง : [ sudo $0 ] " 8 50 \
-		--ok-button "ออก" \
+		--title "${TXT_SUDO_CHECK_TITLE}" \
+		--msgbox "${TXT_SUDO_CHECK_MSG} " 8 50 \
+		--ok-button "${TXT_SUDO_CHECK_OK}" \
 		--clear
 	exit 1
 fi
@@ -28,35 +32,46 @@ fi
 function readme() {
 	whiptail \
 		--backtitle "${TXT_BACKTITLE}" \
-		--title "หน้าปก" \
-		--textbox ${PWD}/msg 34 83 \
-		--ok-button "ต่อไป" \
+		--title "${TXT_README_TITLE}" \
+		--textbox ${TXT_README_TEXTBOX} 34 83 \
+		--ok-button "${TXT_README_OK}" \
 		--scrolltext \
 		--clear
 }
 
 function main() {
-	MENU=$(whiptail \
+	MAIN_MENU=$(whiptail \
 		--backtitle "${TXT_BACKTITLE}" \
-		--title "ตัวช่วยสำหรับ Raspberry pi" \
-		--ok-button "เลือก" \
-		--cancel-button "ออก" \
-		--menu "โปรดเลือกหัวข้อในการตั้งค่า" 14 50 4 \
-			"1 Static IP" "ตั้งค่าหมายเลขเครื่องแบบคงที่ " 3>&1 1>&2 2>&3)
+		--title "${TXT_MAIN_TITLE}" \
+		--ok-button "${TXT_MAIN_OK}" \
+		--cancel-button "${TXT_MAIN_CANCEL}" \
+		--menu "${TXT_MAIN_MENU}" 14 50 4 \
+			"${TXT_MAIN_MENU1}" "${TXT_MAIN_MENU1_DES}" \
+			"${TXT_MAIN_MENU2}" "${TXT_MAIN_MENU2_DES}" 3>&1 1>&2 2>&3)
 
 	RES=$?
 	case ${RES} in
 		0)
-			case ${MENU} in
-				1\ *)
+			case ${MAIN_MENU} in
+				${TXT_MAIN_MENU1})
 							source ${DIR_STATICIP}/interfaces.sh
-							echo "Interfaces Success..."
+							echo ${TXT_MAIN_SUCCESS}
+							main
+						;;
+				${TXT_MAIN_MENU2})
+							#source ${DIR_STATICIP}/interfaces.sh
+							echo "${TXT_MAIN_MENU2} ${TXT_MAIN_MENU2_DES}"
 							main
 						;;
 			esac
 			;;
-		1) echo "ออก" ;;
-		255) echo "ออก [ESC]"
+		1)
+			echo "${TXT_END}"
+			exit 1
+			;;
+		255)
+			echo "${TXT_END_ESC}"
+			exit 1
 	esac
 }
 
