@@ -93,9 +93,8 @@ function interfaces_config() {
 			--msgbox "${TXT_INCNF_ETH_WLAN_ERR_MSG}" 8 50 \
 			--ok-button "${TXT_INCNF_ETH_WLAN_ERR_OK}" \
 			--clear
-					
-			eth0_config
-			wlan0_config
+		eth0_config
+		wlan0_config
 	done
 
 	ssid_config
@@ -163,9 +162,3 @@ interfaces_backup
 interfaces_modify
 interfaces_update
 interfaces_result
-
-
-
-
-
-

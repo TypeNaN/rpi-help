@@ -42,7 +42,7 @@ TXT_INMOD_MSG='เปลี่ยนแปลงการตั้งค่า..
 ###############################################################################
 TXT_INRLT_TITLE='/etc/network/interfaces'
 TXT_INRLT_TEXTBOX='/etc/network/interfaces'
-TXT_INRLT_OK='เสร็จ
+TXT_INRLT_OK='เสร็จ'
 
 ###############################################################################
 ## ฟังก์ชั่น router_config
@@ -87,8 +87,3 @@ TXT_INWPA1_INBOX_DEF='PASSWORD'
 TXT_INWPA2_TITLE='รหัสเชื่อมต่อ'
 TXT_INWPA2_INBOX='โปรดระบุรหัสผ่านเชื่อมต่อสัญญาณเครือข่ายอีกครั้ง \n[WPA-PSK]'
 TXT_INWPA2_INBOX_DEF='PASSWORD'
-
-
-
-
-
