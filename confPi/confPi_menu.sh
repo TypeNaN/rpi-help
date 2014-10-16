@@ -17,6 +17,8 @@ else
 	source ${DIR_CONF_PI}/lang.en
 fi
 
+DIR_STATICIP=${DIR_CONF_PI}/staticIP
+
 function confPi_main() {
         CONFPI_MAIN_MENU=$(whiptail \
                 --backtitle "${TXT_BACKTITLE}" \

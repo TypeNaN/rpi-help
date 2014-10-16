@@ -14,6 +14,8 @@ TXT_PRO_TITLE='Helper install program for your project'
 TXT_PRO_OK='Choose'
 TXT_PRO_CANCEL='Back'
 TXT_PRO_MAIN_MENU='Please choose menu for install program.'
+#TXT_PRO_MAIN_MENU1='Web Server'
+#TXT_PRO_MAIN_MENU1_DES='== Install Lighttpd/MySql/PHP5/phpmyadmin'
 TXT_PRO_MAIN_MENU1='COMING'
 TXT_PRO_MAIN_MENU1_DES='SOON.......'
 

@@ -13,7 +13,6 @@ DIR=${PWD}
 DIR_BACKUP=${DIR}/backup
 DIR_CONF_PI=${DIR}/confPi
 DIR_PRO_PI=${DIR}/proPi
-DIR_STATICIP=${DIR_CONF_PI}/staticIP
 
 if [ ${LANG} == 'th_TH.UTF-8' ]; then
 	source ${DIR}/lang.th

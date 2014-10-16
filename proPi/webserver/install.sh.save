@@ -1,0 +1,32 @@
+#!/bin/bash
+###############################################################################
+# Purpose: Help user
+# Author: Chaimongkol Mangklathon
+# version : 3
+# Licenses : GNU GPL v2.0
+# Updated : 16/10/2557
+###############################################################################
+
+if [ ! ${DIR}  ]; then
+	exit 1
+fi
+
+if [ ${LANG} == 'th_TH.UTF-8' ]; then
+	source ${DIR_WEBSERVER}/lang.th
+else
+	source ${DIR_WEBSERVER}/lang.en
+fi
+
+function install_dependency {
+	function install_dependency {
+
+function webserver_main() {
+	service lighttpd stop
+	service mysql stop
+	echo "Update..."
+	apt-get -qq update
+	echo "Upgrade..."
+	apt-get -qq upgrade -y
+}
+
+webserver_main
