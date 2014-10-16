@@ -2,9 +2,9 @@
 ###############################################################################
 # Purpose : Language ENGLISH
 # Author : Chaimongkol Mangklathon
-# version : 2
+# version : 3
 # Licenses : GNU GPL v2.0
-# Updated : 20/08/2557
+# Updated : 16/10/2557
 ###############################################################################
 
 ###############################################################################
@@ -12,7 +12,7 @@
 ###############################################################################
 TXT_BACKTITLE='Raspberry pi Help Script By Chaimongkol Mangklathon [https://www.github.com/Yanatecho/rpi-help.git]'
 TXT_SUDO_CHECK_TITLE='Permission Denied'
-TXT_SUDO_CHECK_MSG="Need permission root to run this. \nPlease try again using the command [ sudo $0]"
+TXT_SUDO_CHECK_MSG="Need permission root to run this. \nPlease try again using the command \n[ sudo ${0} ]"
 TXT_SUDO_CHECK_OK='EXIT'
 
 ###############################################################################
@@ -25,15 +25,16 @@ TXT_README_OK='NEXT'
 ###############################################################################
 ## Function main
 ###############################################################################
-TXT_MAIN_TITLE='Helper Config Raspberry pi'
+TXT_MAIN_TITLE='Helper Raspberry pi User'
 TXT_MAIN_OK='Choose'
 TXT_MAIN_CANCEL='EXIT'
-TXT_MAIN_MENU='Please choose menu for settings.'
-TXT_MAIN_MENU1='Static IP'
-TXT_MAIN_MENU1_DES='Set your  IP address to static.'
-TXT_MAIN_MENU2='COMING'
-TXT_MAIN_MENU2_DES='SOON.......'
-TXT_MAIN_SUCCESS='Success...'
+TXT_MAIN_MENU='Please choose menu.'
+TXT_MAIN_MENU1='Config'
+TXT_MAIN_MENU1_DES='your Raspberry pi.'
+TXT_MAIN_MENU2='Install'
+TXT_MAIN_MENU2_DES='program for your project.'
+TXT_MAIN_MENU3='COMING'
+TXT_MAIN_MENU3_DES='SOON.......'
 
 ###############################################################################
 ## End Program

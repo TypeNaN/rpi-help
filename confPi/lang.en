@@ -1,0 +1,28 @@
+#!/bin/bash
+###############################################################################
+# Purpose : Language ENGLISH
+# Author : Chaimongkol Mangklathon
+# version : 2
+# Licenses : GNU GPL v2.0
+# Updated : 16/10/2557
+###############################################################################
+
+###############################################################################
+## Function main
+###############################################################################
+TXT_CONF_TITLE='Helper Config Raspberry pi'
+TXT_CONF_OK='Choose'
+TXT_CONF_CANCEL='Back'
+TXT_CONF_MAIN_MENU='Please choose menu for settings.'
+
+TXT_CONF_MAIN_MENU1='Static IP'
+TXT_CONF_MAIN_MENU1_DES='== Set your IP address to static.'
+
+TXT_CONF_MAIN_MENU2='COMING'
+TXT_CONF_MAIN_MENU2_DES='SOON.......'
+
+###############################################################################
+## End Program
+###############################################################################
+TXT_CONF_END='BACK'
+TXT_CONF_END_ESC='BACK [ESC]'

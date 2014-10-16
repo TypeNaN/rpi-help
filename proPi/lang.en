@@ -1,0 +1,24 @@
+#!/bin/bash
+###############################################################################
+# Purpose : Language ENGLISH
+# Author : Chaimongkol Mangklathon
+# version : 3
+# Licenses : GNU GPL v2.0
+# Updated : 16/10/2557
+###############################################################################
+
+###############################################################################
+## Function main
+###############################################################################
+TXT_PRO_TITLE='Helper install program for your project'
+TXT_PRO_OK='Choose'
+TXT_PRO_CANCEL='Back'
+TXT_PRO_MAIN_MENU='Please choose menu for install program.'
+TXT_PRO_MAIN_MENU1='COMING'
+TXT_PRO_MAIN_MENU1_DES='SOON.......'
+
+###############################################################################
+## End Program
+###############################################################################
+TXT_PRO_END='BACK'
+TXT_PRO_END_ESC='BACK [ESC]'
