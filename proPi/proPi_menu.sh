@@ -2,9 +2,9 @@
 ###############################################################################
 # Purpose: Help user
 # Author: Chaimongkol Mangklathon
-# version : 3
+# version : 3.1
 # Licenses : GNU GPL v2.0
-# Updated : 16/10/2557
+# Updated : 17/10/2557
 ###############################################################################
 
 if [ ! ${DIR}  ]; then
@@ -26,23 +26,24 @@ function proPi_main() {
                 --ok-button "${TXT_PRO_OK}" \
                 --cancel-button "${TXT_PRO_CANCEL}" \
                 --menu "${TXT_PRO_MAIN_MENU}" 14 60 4 \
-			"${TXT_PRO_MAIN_MENU1}" "${TXT_PRO_MAIN_MENU1_DES}" 3>&1 1>&2 2>&3)
+			"${TXT_PRO_MAIN_MENU1}" "${TXT_PRO_MAIN_MENU1_DES}" \
+			"${TXT_PRO_MAIN_MENU2}" "${TXT_PRO_MAIN_MENU2_DES}" 3>&1 1>&2 2>&3)
         RES=$?
         case ${RES} in
 		0)
 			case ${PROPI_MAIN_MENU} in
 				${TXT_PRO_MAIN_MENU1})
-					#source ${DIR_WEBSERVER}/install.sh
+					source ${DIR_WEBSERVER}/install.sh
 					proPi_main
 					;;
 			esac
 			;;
 		1)
-			echo "${TXT_PRO_END}"
+			#echo "${TXT_PRO_END}"
 			main
 			;;
 		255)
-			echo "${TXT_PRO_END_ESC}"
+			#echo "${TXT_PRO_END_ESC}"
 			main
 	esac
 }

@@ -2,9 +2,9 @@
 ###############################################################################
 # Purpose: Help user
 # Author: Chaimongkol Mangklathon
-# version : 3
+# version : 3.1
 # Licenses : GNU GPL v2.0
-# Updated : 16/10/2557
+# Updated : 17/10/2557
 ###############################################################################
 
 if [ ! ${DIR}  ]; then
@@ -41,11 +41,11 @@ function confPi_main() {
 			esac
 			;;
 		1)
-			echo "${TXT_CONF_END}"
+			#echo "${TXT_CONF_END}"
 			main
 			;;
 		255)
-			echo "${TXT_CONF_END_ESC}"
+			#echo "${TXT_CONF_END_ESC}"
 			main
 	esac
 }

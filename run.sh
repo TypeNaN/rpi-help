@@ -2,10 +2,11 @@
 ###############################################################################
 # Purpose: Help user
 # Author: Chaimongkol Mangklathon
-# version : 3
+# version : 3.1
 # Licenses : GNU GPL v2.0
-# Updated : 16/10/2557
+# Updated : 17/10/2557
 ###############################################################################
+date1=$(date +"%s")
 
 USER_HOME=$(eval echo ~${SUDO_USER})
 
@@ -65,11 +66,17 @@ function main() {
 			esac
 			;;
 		1)
-			echo "${TXT_END}"
+			#echo "${TXT_END}"
+			date2=$(date +"%s")
+			diff=$(($date2-$date1))
+			echo "$(($diff / 60)) minutes and $(($diff % 60)) seconds elapsed."
 			exit 1
 			;;
 		255)
-			echo "${TXT_END_ESC}"
+			#echo "${TXT_END_ESC}"
+			date2=$(date +"%s")
+			diff=$(($date2-$date1))
+			echo "$(($diff / 60)) minutes and $(($diff % 60)) seconds elapsed."
 			exit 1
 	esac
 }
